@@ -43,4 +43,31 @@ export class PostResolver {
     }
     return post;
   }
+
+  // @Mutation(() => Boolean) 
+  // async deletePost(
+  //   @Arg('id') id: number, 
+  //   @Ctx() { em }: MyContext
+  // ) : Promise<boolean> {
+  //   try {
+  //     await em.nativeDelete(Post, { id })
+  //   } catch {
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
+  @Mutation(() => Post, { nullable: true })
+  async deletePost(
+    @Arg('id') id:number,
+    @Ctx() { em }: MyContext
+  ) : Promise<Post | null> {
+    const post = await em.findOne(Post, { id });
+    if (post) {
+      await em.nativeDelete(Post, { id })
+      return post;
+    } else {
+      return null;
+    }
+  }
 }
