@@ -11,7 +11,7 @@ export class PostResolver {
 
   @Query(() => Post, { nullable: true }) //graphql type
   post(
-    @Arg('id', () => Int) id: number, //type is optional, graphql infers type from typescript
+    @Arg('id', () => Int) id: number, //explicitly listing type is optional, graphql infers type
     @Ctx() { em }: MyContext
   ): Promise<Post | null> { //typescript type
     return em.findOne(Post, { id });
