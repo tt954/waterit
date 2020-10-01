@@ -1,3 +1,4 @@
+saves userId on session
 req.session.userId = user.id
 
 1
