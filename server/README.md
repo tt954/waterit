@@ -15,3 +15,10 @@ react
 chakra-ui
 
 graphQL code generator: identify queries and their typescript types
+
+yarn watch in server 
+yarn dev in server & web
+redis-server is running 
+postgresql is running 
+database: http://localhost:4000/graphql
+frontend: http://localhost:3000

@@ -6,10 +6,12 @@ import { Box, Button } from '@chakra-ui/core';
 import { useMutation } from 'urql';
 import { useRegisterMutation } from '../generated/graphql';
 import { toErrorMap } from '../utils/toErrorMap';
+import { useRouter } from 'next/router';
 
 interface registerProps {}
 
 export const Register: React.FC<registerProps> = ({}) => {
+	const router = useRouter();
 	const [, register] = useRegisterMutation(); //customer hooks
 
 	return (
@@ -21,6 +23,9 @@ export const Register: React.FC<registerProps> = ({}) => {
 
 					if (response.data?.register.errors) {
 						setErrors(toErrorMap(response.data.register.errors));
+					} else if (response.data?.register.errors) {
+						//worked
+						router.push("/");
 					}
 					//data will return an error if data is undefined vs. data? will return undefined if there is no data 
 				}}
