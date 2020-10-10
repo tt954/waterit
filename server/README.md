@@ -13,3 +13,5 @@ session
 typegrapQL
 react
 chakra-ui
+
+graphQL code generator: identify queries and their typescript types
