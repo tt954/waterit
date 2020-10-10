@@ -19,3 +19,9 @@ fjasjdhfalefhelaie1823 -> sess:querezjdkjfwel
 make a request to redis 
 sess:querezjdkjfwel -> { userId: 1 }
 
+create mutations inside graphql/mutations folder 
+run yarn gen 
+use mutation hooks as needed 
+
+optional chaining in typescript: feature that allows the access properties that are deeply nested
+

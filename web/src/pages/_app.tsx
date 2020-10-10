@@ -9,14 +9,14 @@ const client = createClient({
 
 import theme from '../theme';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: any) {
   return (
     <Provider value={client}>
       <ThemeProvider theme={theme}>
-        <ColorModeProvider>
+        {/* <ColorModeProvider> */}
           <CSSReset />
           <Component {...pageProps} />
-        </ColorModeProvider>
+        {/* </ColorModeProvider> */}
       </ThemeProvider>
     </Provider>
   );
