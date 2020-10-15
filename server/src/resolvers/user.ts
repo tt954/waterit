@@ -61,7 +61,7 @@ export class UserResolver {
       return {
         errors: [{
           field: "username",
-          message: "username length must be greater than 2 characters"
+          message: "Username length must be greater than 2 characters"
         }]
       }
     }
@@ -70,7 +70,7 @@ export class UserResolver {
       return {
         errors: [{
           field: "password",
-          message: "password length must be greater than 2 characters"
+          message: "Password length must be greater than 2 characters"
         }]
       }
     }
@@ -103,6 +103,7 @@ export class UserResolver {
     }
 
     // store user id session, set cookie, keeps user logged in
+    console.log("current user", user);
     req.session.userId = user.id; 
 
     return { user };
@@ -118,7 +119,7 @@ export class UserResolver {
       return {
         errors: [{ 
           field: "username",
-          message: "username does not exist"
+          message: "Username does not exist"
         }]
       }
     }
@@ -129,7 +130,7 @@ export class UserResolver {
         errors: [
           {
             field: "password",
-            message: "incorrect password",
+            message: "Incorrect password",
           },
         ],
       };
@@ -137,6 +138,6 @@ export class UserResolver {
 
     req.session.userId = user.id; 
     
-    return { user }
+    return { user };
   }
 }

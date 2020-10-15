@@ -13,10 +13,8 @@ function MyApp({ Component, pageProps }: any) {
   return (
     <Provider value={client}>
       <ThemeProvider theme={theme}>
-        {/* <ColorModeProvider> */}
           <CSSReset />
           <Component {...pageProps} />
-        {/* </ColorModeProvider> */}
       </ThemeProvider>
     </Provider>
   );
