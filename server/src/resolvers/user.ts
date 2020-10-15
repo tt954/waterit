@@ -1,7 +1,16 @@
+import { 
+  Resolver, 
+  Mutation, 
+  InputType, 
+  Field, 
+  Arg, 
+  Ctx, 
+  ObjectType, 
+  Query } from "type-graphql";
 import { User } from "../entities/User";
 import { MyContext } from "src/types";
-import { Resolver, Mutation, InputType, Field, Arg, Ctx, ObjectType, Query } from "type-graphql";
 import argon2 from 'argon2';
+import { EntityManager } from '@mikro-orm/postgresql';
 
 @InputType()
 class UsernamePasswordInput {
@@ -52,7 +61,7 @@ export class UserResolver {
       return {
         errors: [{
           field: "username",
-          message: "length must be greater than 2 characters"
+          message: "username length must be greater than 2 characters"
         }]
       }
     }
@@ -61,24 +70,33 @@ export class UserResolver {
       return {
         errors: [{
           field: "password",
-          message: "length must be greater than 2 characters"
+          message: "password length must be greater than 2 characters"
         }]
       }
     }
 
     const hashedPassword = await argon2.hash(options.password);
-    const user = em.create(User, { 
-      username: options.username, 
-      password: hashedPassword, 
-    });
+    // const user = em.create(User, { 
+    //   username: options.username, 
+    //   password: hashedPassword, 
+    // });
+    let user; 
     try {
-      await em.persistAndFlush(user);
+      const result = await (em as EntityManager).createQueryBuilder(User).getKnexQuery().insert({
+        username: options.username,
+        password: hashedPassword, 
+        created_at: new Date(),
+        updated_at: new Date()
+      }).returning("*");
+
+      user = result[0];
+      // await em.persistAndFlush(user);
     } catch(err) {
       if (err.code === "23505") {
         return {
           errors: [{
             field: "username",
-            message: "username already exists"
+            message: "Username already exists"
           }]
         }
       }
