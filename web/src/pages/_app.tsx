@@ -1,7 +1,7 @@
 import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core';
 import { cacheExchange, Cache, QueryInput } from '@urql/exchange-graphcache';
 import { Provider, createClient, fetchExchange, dedupExchange } from 'urql';
-import { MeDocument, LoginMutation, MeQuery, RegisterMutation } from '../generated/graphql';
+import { MeDocument, LoginMutation, MeQuery, RegisterMutation, LogoutMutation } from '../generated/graphql';
 import theme from '../theme';
 
 // properly cast types 
@@ -22,6 +22,14 @@ const client = createClient({
   exchanges: [dedupExchange, cacheExchange({
     updates: {
     Mutation: {
+      logout: (_result, args, cache, info) => {
+        betterUpdateQuery<LogoutMutation, MeQuery>(
+          cache, 
+          { query: MeDocument },
+          _result, 
+          () => ({ me: null })
+        );
+      },
       login: (_result, args, cache, info) => {
         betterUpdateQuery<LoginMutation, MeQuery>(
           cache, 
@@ -59,8 +67,6 @@ const client = createClient({
   },
   }), fetchExchange], // custom update to overwrite cached pages 
 })
-
-
 
 function MyApp({ Component, pageProps }: any) {
   return (
