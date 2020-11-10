@@ -13,6 +13,7 @@ session
 typegrapQL
 react
 chakra-ui
+nodemailer (send out test emails in development)
 
 graphQL code generator: identify queries and their typescript types
 
