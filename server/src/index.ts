@@ -13,11 +13,8 @@ import redis from "redis";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import cors from 'cors';
-import { sendEmail } from "./utils/sendEmail";
 
 const main = async () => {
-  sendEmail('bob@bob.com', "hello there");
-  
   const orm = await MikroORM.init(microConfig); // connects to the database
   await orm.getMigrator().up(); // automatically run migrations 
 
