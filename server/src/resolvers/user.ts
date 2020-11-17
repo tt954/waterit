@@ -16,6 +16,8 @@ import { COOKIE_NAME } from "../constants";
 @InputType()
 class UsernamePasswordInput {
   @Field()
+  email: string
+  @Field()
   username: string
   @Field()
   password: string
