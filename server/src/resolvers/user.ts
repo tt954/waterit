@@ -69,6 +69,15 @@ export class UserResolver {
     @Arg('options') options: UsernamePasswordInput,
     @Ctx() { em, req }: MyContext
   ) : Promise<UserResponse> {
+    if (!options.email.includes('@')) {
+      return {
+        errors: [{
+          field: "email",
+          message: "Invalid email"
+        }]
+      }
+    }
+
     if (options.username.length <= 2) {
       return {
         errors: [{
@@ -77,7 +86,7 @@ export class UserResolver {
         }]
       }
     }
-
+    
     if (options.password.length <= 2) {
       return {
         errors: [{
