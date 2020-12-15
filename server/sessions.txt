@@ -25,3 +25,17 @@ use mutation hooks as needed
 
 optional chaining in typescript: feature that allows the access properties that are deeply nested
 
+
+running application
+cd server 
+yarn watch 
+yarn dev 
+
+cd web 
+yarn dev 
+
+redis-server to run redis server 
+start postgresql 
+
+
+
