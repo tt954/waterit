@@ -21,7 +21,8 @@ export class User {
   username!: string;
 
   @Field()
-  @Property({ type: "text", unique: true })
+  @Property({ type: "text", unique: true, nullable: true })
+  // email can be null 
   email!: string;
 
   @Property({ type: "text"})
